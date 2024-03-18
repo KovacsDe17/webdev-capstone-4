@@ -1,17 +1,16 @@
 <%- include('partial/header.ejs') %>
-    <h1>Joke API</h1>
     <h2>What's your name?</h2>
     <form action="/show-joke" method="post">
         <label for="name">I am</label>
         <input type="text" name="name" id="name">
         <input type="submit" value="Tell me a joke!">
     </form>
-    <% if(locals.name){ %>
+    <% if(locals.name && locals.joke){ %>
     <div id="joke">
         <h2><%= name %>, here's one for you:</h2>
 
-        <h3>Firstline</h3>
-        <h3>Secondline</h3>
+        <h3><%= joke.type=="twopart"?joke.setup:joke.joke %></h3>
+        <h3 <%= joke.type=="twopart"?"":"hidden" %>><%= joke.type=="twopart"?joke.delivery:"" %></h3>
     </div>
     <% } %>
 <%- include('partial/footer.ejs') %>
