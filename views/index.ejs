@@ -1,16 +1,25 @@
 <%- include('partial/header.ejs') %>
+<div class="container">
     <h2>What's your name?</h2>
     <form action="/show-joke" method="post">
-        <label for="name">I am</label>
-        <input type="text" name="name" id="name">
-        <input type="submit" value="Tell me a joke!">
+        <input class="form-control form-control-lg" type="text" name="name" id="name" placeholder="Write here your name">
+        <input class="btn btn-primary mt-3" type="submit" value="Tell me a joke!">
     </form>
-    <% if(locals.name && locals.joke){ %>
-    <div id="joke">
-        <h2><%= name %>, here's one for you:</h2>
+</div>
 
-        <h3><%= joke.type=="twopart"?joke.setup:joke.joke %></h3>
-        <h3 <%= joke.type=="twopart"?"":"hidden" %>><%= joke.type=="twopart"?joke.delivery:"" %></h3>
+<% if(locals.name && locals.joke){ %>
+    
+<div class="container my-5">
+    <div class="border-bottom mb-5"></div>
+
+    <h2 class="text-body-secondary"><%= name %>, here's one for you:</h2>
+
+    <div class="p-5 text-center bg-body-tertiary rounded-3">
+      <h1 class="text-body-emphasis text-center"><%= joke.type=="twopart"?joke.setup:joke.joke %></h1>
+      <h2 class="text-body text-center" <%= joke.type=="twopart"?"":"hidden" %>>
+        <%= joke.type=="twopart"?joke.delivery:"" %>
+      </h2>
     </div>
-    <% } %>
+</div>
+<% } %>
 <%- include('partial/footer.ejs') %>
